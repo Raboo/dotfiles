@@ -1,0 +1,116 @@
+
+source $HOME/.profile
+
+# bash history config
+export HISTSIZE=6000
+export HISTFILESIZE=10000
+export HISTIGNORE="&:[ ]*:exit:ls"
+shopt -s histappend
+
+# lang
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export EDITOR="vim"
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+alias ls='ls -GFh --color'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# homebrew
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.bash 2>/dev/null || :
+
+
+
+
+
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+#[[ -s "$HOME/.chef/knife_autocomplete.sh" ]] &&. $HOME/.chef/knife_autocomplete.sh
+
+export GDK_PIXBUF_MODULEDIR="/usr/local/lib/gdk-pixbuf-2.0/2.10.0/loaders"
+
+if [[ $- == *i* ]]; then
+  export PS1="\t \[$(tput sgr0)\]\[\033[38;5;13m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$ \[$(tput sgr0)\]"
+  test `id -u` -eq 0 && export PS1="\t \[$(tput sgr0)\]\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$ \[$(tput sgr0)\]"
+  export PS1='\[\e]0;\u@\h: \w\a\]'$PS1
+fi
+
+#PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD##*/}\007"'
+#PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+source $HOME/.iterm2_shell_integration.bash
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/raboo/google-cloud-sdk/path.bash.inc ]; then
+  source '/Users/raboo/google-cloud-sdk/path.bash.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/raboo/google-cloud-sdk/completion.bash.inc ]; then
+  source '/Users/raboo/google-cloud-sdk/completion.bash.inc'
+fi
+
+#eval $(minishift oc-env)
+
+# added by Anaconda2 5.1.0 installer
+#export PATH="/anaconda2/bin:$PATH"
+
+alias pserve="python -m SimpleHTTPServer"
+alias tb="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)"
+alias tbc="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)| strings | pbcopy"
+alias dokken="KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen"
+alias 'sslyze'='docker run --rm -it nablac0d3/sslyze'
+
+
+cat << 'EOF'
+Custom aliases:
+pserve - python webserver
+tb - termbin
+tbc - termbin (url in clipboard)
+sslyze - SSL/TLS test tool
+EOF
+
+function gam() { "/Users/raboo/bin/gam/gam" "$@" ; }
+
+complete -C /usr/local/bin/waypoint waypoint
+
+alias gam="/Users/raboo/bin/gamadv-xtd3/gam"
+
+complete -C /opt/homebrew/bin/terraform terraform
+
+source <(k9s completion bash)
+
+_s5cmd_cli_bash_autocomplete() {
+	if [[ "${COMP_WORDS[0]}" != "source" ]]; then
+		COMPREPLY=()
+		local opts cur cmd
+		cur="${COMP_WORDS[COMP_CWORD]}"
+		cmd="${COMP_LINE:0:$COMP_POINT}"
+		[ "${COMP_LINE:COMP_POINT-1:$COMP_POINT}" == " " ] \
+			&& cmd="${cmd} ''"
+		opts=$($cmd --generate-bash-completion)
+
+		while IFS='' read -r line;
+		do
+			COMPREPLY+=("$line");
+		done \
+		< <(compgen -o bashdefault -o default -o nospace -W "${opts}" -- "${cur}")
+
+		return 0
+	fi
+}
+
+# call the _s5cmd_cli_bash_autocomplete to complete s5cmd command.
+complete -o nospace -F _s5cmd_cli_bash_autocomplete s5cmd
+
+alias k=kubectl
+complete -F $(complete -p kubectl | awk 'sub(/.*-F/,""){print $1}') k
+#complete -o default -F __start_kubectl k
+
+alias ks=kubectl
+complete -F __start_kubectl ks

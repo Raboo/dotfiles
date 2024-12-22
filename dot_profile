@@ -1,0 +1,57 @@
+source ${HOME}/.config/tokens.profile
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
+PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+# apache bench
+PATH="/usr/local/opt/ab/bin:$PATH"
+
+export GOPATH=$HOME/.go
+PATH=$GOPATH/bin:$PATH
+
+PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
+#PATH="/usr/local/opt/python@3.8/bin:$PATH"
+#PATH="$HOME/Library/Python/3.7/bin:$PATH"
+
+# brew openjdk
+PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+export PATH
+
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+export MONO_GAC_PREFIX="/usr/local"
+
+#source dnvm.sh
+
+#alias gam="/Users/raboo/bin/gam/gam"
+alias gam="/Users/raboo/bin/gamadv-xtd3/gam"
+export OLDGAMPATH="/Users/raboo/bin/gam"
+
+
+export CLOUDSDK_PYTHON="/usr/bin/python"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export PATH=$PATH:/Users/raboo/.cargo/bin
+
+# export KUBECONFIG=~/.kube/config:~/.kube/ranchur-local.yaml:~/.kube/ur-cluster-internal.yaml
+export KUBECONFIG=~/.kube/config
+for file in ~/.kube/*.yaml; do
+  export KUBECONFIG=$KUBECONFIG:$file
+done
+
+alias cat='bat -pp'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+alias bathelp='bat -pp --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}
+export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"
