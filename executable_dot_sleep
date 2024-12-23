@@ -3,3 +3,7 @@
 # See also: ~/.sleep, ~/.wakeup, ~/.sleepwatcher.log
 /opt/homebrew/bin/blueutil --power off
 echo "$(date -Iseconds) -- Sleep event detected. Disabled bluetooth. Bluetooth status: $(/opt/homebrew/bin/blueutil --power)." >> ~/.sleepwatcher.log
+
+# /usr/sbin/networksetup -setairportpower en0 off
+# echo "$(date -Iseconds) -- Sleep event detected. Disabled bluetooth and wifi. Bluetooth status: $(/opt/homebrew/bin/blueutil --power). $(/usr/sbin/networksetup -getairportpower en0)" >> ~/.sleepwatcher.log
+

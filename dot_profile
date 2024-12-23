@@ -1,6 +1,6 @@
 source ${HOME}/.config/tokens.profile
 
-export BASH_SILENCE_DEPRECATION_WARNING=1
+# export BASH_SILENCE_DEPRECATION_WARNING=1
 
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
@@ -54,4 +54,5 @@ alias bathelp='bat -pp --language=help'
 help() {
     "$@" --help 2>&1 | bathelp
 }
-export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"
+
+# export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"

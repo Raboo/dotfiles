@@ -4,3 +4,7 @@
 
 /opt/homebrew/bin/blueutil --power on
 echo "$(date -Iseconds) -- Wake event detected. Enabled bluetooth. Bluetooth status: $(/opt/homebrew/bin/blueutil --power)." >> ~/.sleepwatcher.log
+
+# /usr/sbin/networksetup -setairportpower en0 on
+# echo "$(date -Iseconds) -- Wake event detected. Enabled bluetooth and wifi. Bluetooth status: $(/opt/homebrew/bin/blueutil --power). $(/usr/sbin/networksetup -getairportpower en0)" >> ~/.sleepwatcher.log
+
