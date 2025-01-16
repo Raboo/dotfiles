@@ -56,3 +56,5 @@ help() {
 }
 
 # export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"
+
+alias dns-flush='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
