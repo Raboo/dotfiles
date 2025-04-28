@@ -56,5 +56,5 @@ help() {
 }
 
 # export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"
-
+export CLOUDSDK_PYTHON=/usr/bin/python3
 alias dns-flush='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
