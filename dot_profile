@@ -1,27 +1,19 @@
 source ${HOME}/.config/tokens.profile
 
-# export BASH_SILENCE_DEPRECATION_WARNING=1
-
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 PATH=$PATH:/usr/local/opt/go/libexec/bin
-
-# apache bench
-PATH="/usr/local/opt/ab/bin:$PATH"
-
 export GOPATH=$HOME/.go
 PATH=$GOPATH/bin:$PATH
-
 PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
 #PATH="/usr/local/opt/python@3.8/bin:$PATH"
 #PATH="$HOME/Library/Python/3.7/bin:$PATH"
 
 # brew openjdk
 PATH="/usr/local/opt/openjdk/bin:$PATH"
-
-PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export PATH
 
@@ -35,6 +27,13 @@ export MONO_GAC_PREFIX="/usr/local"
 alias gam="/Users/raboo/bin/gamadv-xtd3/gam"
 export OLDGAMPATH="/Users/raboo/bin/gam"
 
+export EDITOR="vim"
+export LSCOLORS=GxFxCxDxBxegedabagaced
+export CLICOLOR=1
+
+# lang
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 export CLOUDSDK_PYTHON="/usr/bin/python"
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -47,6 +46,15 @@ for file in ~/.kube/*.yaml; do
   export KUBECONFIG=$KUBECONFIG:$file
 done
 
+alias ls='ls -GFh --color'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias pserve="python -m SimpleHTTPServer"
+alias tb="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)"
+alias tbc="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)| strings | pbcopy"
+alias dokken="KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen"
+alias 'sslyze'='docker run --rm -it nablac0d3/sslyze'
 alias cat='bat -pp'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
