@@ -55,6 +55,7 @@ alias tb="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)"
 alias tbc="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)| strings | pbcopy"
 alias dokken="KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen"
 alias 'sslyze'='docker run --rm -it nablac0d3/sslyze'
+alias dns-flush='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias cat='bat -pp'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -65,4 +66,13 @@ help() {
 
 # export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"
 export CLOUDSDK_PYTHON=/usr/bin/python3
-alias dns-flush='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+
+# Show all files including hidden ones
+defaults write com.apple.finder AppleShowAllFiles YES
+# Disable .DS_Store files on network shares
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+# Disable .DS_Store files on removable media
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool TRUE
+# Disable Apple Music/iTunes from hijacking the Play key
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist &>/dev/null
