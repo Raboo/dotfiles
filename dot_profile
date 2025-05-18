@@ -58,6 +58,7 @@ alias 'sslyze'='docker run --rm -it nablac0d3/sslyze'
 alias dns-flush='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias cat='bat -pp'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_STYLE="numbers,changes"
 
 alias bathelp='bat -pp --language=help'
 help() {
