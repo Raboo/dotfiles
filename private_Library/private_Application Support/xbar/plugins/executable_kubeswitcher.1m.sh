@@ -14,7 +14,9 @@ KUBERNETES_LOGO='iVBORw0KGgoAAAANSUhEUgAAABwAAAAbCAYAAABvCO8sAAAABGdBTUEAALGPC/x
 
 # Scan for any custom KUBECONFIG in all the normal places and apply to this script it if it is set.
 eval $(grep -hs KUBECONFIG ~/.profile ~/.bash_profile ~/.bashrc ~/.zshrc, ~/.zshenv ~/.zprofile)
-#eval $(/bin/zsh -c "env|egrep -v 'PS1|^_='")
+for file in $(ls ~/.kube/*.yaml); do
+  export KUBECONFIG=$KUBECONFIG:$file
+done
 
 currentNamespace=$(kubectl config view --minify --output 'jsonpath={..namespace}')
 currentContext=$(kubectl config current-context)
