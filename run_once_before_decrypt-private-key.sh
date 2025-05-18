@@ -1,0 +1,1 @@
+run_once_before_decrypt-private-key.sh.tmpl
